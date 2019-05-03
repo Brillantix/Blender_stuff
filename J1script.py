@@ -45,20 +45,18 @@ materialt.node_tree.links.new(noise_tex_node.outputs[0], outp_node.inputs[2])
 bpy.ops.object.mode_set(mode="EDIT")
 
 #switching select mode to vertices
-bpy.ops.mesh.select_mode(type="VERT")
+bpy.ops.mesh.select_mode(type="FACE")
 #deselecting all verts
 bpy.ops.mesh.select_all(action="DESELECT")
 
 #switching mode
 bpy.ops.object.mode_set(mode="OBJECT")
-bpy.types.SpaceView3D.pivot_point='CURSOR'
-bpy.types.SpaceView3D.cursor_location = (0.0, 0.0, 0.0)
+#bpy.types.SpaceView3D.pivot_point='CURSOR'
+#bpy.types.SpaceView3D.cursor_location = (0.0, 0.0, 0.0)
 #selecting 4 vertices
-l = [[0,1,2,3],[4,5,6,7]]
-for sciana in l:
-	for i in range(0,4):
-		m = sciana[i]
-		object.data.vertices[m].select = True
+walls = len(bpy.context.active_object.data.polygons)
+for wall in range(0,walls):
+	bpy.context.active_object.data.polygons[wall].select = True
 	#switching mode
 	bpy.ops.object.mode_set(mode="EDIT")
 	#bpy.ops.mesh.extrude_region_move(TRANSFORM_OT_translate={"value":(0, 0, .1)})
